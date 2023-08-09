@@ -20,22 +20,55 @@ require('dbConnection.php');
   <?php 
   ini_set('display_errors', 1);
   error_reporting(E_ALL);
+  
+
+  
+  $id=$_GET['id'];
   require('partial/navbar.php') 
+   ?>
+  
+  <?php
 
-  $parts = parse_url($url);
-  parse_str($parts['query'], $query);
-  echo $query['catid'];
-  ?>
+$servername = "localhost";
+$username = "root";$password = "";
+$dbname = "codingForum";
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+// echo "connevction fail to database";
+if ($conn->connect_error) {
+    echo "connevction fail to database";
+die("Connection failed: " . $conn->connect_error);
+}
 
-  <div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+
+$sql = "SELECT cotegory_id, cotegory_name, cotegory_description FROM cotegory WHERE cotegory_id='$id'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    // echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+    $name=$row['cotegory_name'];
+    echo '<div class="jumbotron">
+  <h1 class="display-4">'.$row['cotegory_name'].'</h1>
+  <p class="lead"> '.$row['cotegory_description'].'.</p>
   <hr class="my-4">
   <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
   </p>
-</div>
+</div>';
+
+  }
+} else {
+  echo "0 results";
+}
+
+
+
+ 
+
+?>
 <div class="container">
   <h1>browjing question</h1>
   <div class="media">

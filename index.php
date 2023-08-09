@@ -38,9 +38,9 @@ require('dbConnection.php');
                 <div class="card" style="width: 18rem;">
                       <img class="card-img-top" src="" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="/Piyush/threadlist.php?catid='.$id.'">'.$row["cotegory_name"].'</a></h5>
+                            <h5 class="card-title"><a href="/Piyush/threadlist.php?id='.$id.'">'.$row["cotegory_name"].'</a></h5>
                             <p class="card-text">'.substr($row["cotegory_description"],0,10).'.....</p>
-                            <a href="/Piyush/threadlist.php?catid='.$id.'" class="btn btn-primary">View Thread</a>
+                            <a href="/Piyush/threadlist.php?id='.$id.'" class="btn btn-primary">View Thread</a>
                         </div>
                 </div>
             </div> ';
