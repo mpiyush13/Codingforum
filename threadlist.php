@@ -123,22 +123,22 @@ else{
 <div class="container">
   <h1 >Browse Question</h1>
   <?php
-  $sql = "SELECT thread_id, thread_title, thread_desc, thread_id, timestamp FROM threads WHERE thread_cat_id='$id'";
+  $sql = "SELECT thread_id, thread_title, thread_desc, thread_user_id, timestamp FROM threads WHERE thread_cat_id='$id'";
   $result = $conn->query($sql);
   
   if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
       $name1=$row['thread_title'];
-      $thread_id=$row['thread_id'];
-      $sql2 = "SELECT user_email FROM users WHERE sno='$thread_id'";
+      $thread_user_id=$row['thread_user_id'];
+      $sql2 = "SELECT user_email FROM users WHERE sno='$thread_user_id'";
       $result2 = $conn->query($sql2);
       $row2 = $result2->fetch_assoc();
 
   echo '<div class="media">
   <img class="mr-3" src="..." alt="Generic placeholder image">
   <div class="media-body">
-  <p class="fs-3 my-0">Asked by : piyush at time '.$row['timestamp'].'</p>
+  <p class="fs-3 my-0">Asked by : '.$row2['user_email'].'at time '.$row['timestamp'].'</p>
     <h5 class="mt-0"><a href="thread.php?threadid='.$row['thread_id'].'">'.$row['thread_title'].'</a></h5>
     '.$row['thread_desc'].'
   </div>
