@@ -19,12 +19,22 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Cotegory
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+        $sql = "SELECT cotegory_name, cotegory_id FROM cotegory ";
+        $result = $conn->query($sql);
+   
+   if ($result->num_rows>0) {
+
+    while($row = $result->fetch_assoc()) {
+    echo '<a class="dropdown-item" href="/Piyush/threadlist.php?id='.$row['cotegory_id'].'">'.$row['cotegory_name'].'</a>';
+
+}
+
+}
+
+          
+          
+       echo '</div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/Piyush/contact.php">Contact</a>
@@ -33,8 +43,8 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="my-2 row">';
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true)
     {
-        echo '<form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        echo '<form class="form-inline my-2 my-lg-0" method="get" action="search.php" >
+        <input class="form-control mr-sm-2" type="search" name="search"  placeholder="Search" aria-label="Search">
         <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
       </form>
       <p class="text-light my-0 mx-2">Welcome to '.$_SESSION['username'].' </p>
@@ -43,8 +53,8 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     }
     else{
 
-        echo '<form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        echo '<form class="form-inline my-2 my-lg-0" method="get" action="search.php/">
+      <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
     </form>
         <button class="btn btn-outline-success ml-2" data-toggle="modal" data-target="#loginModal" >Login</button>

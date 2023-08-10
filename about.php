@@ -1,3 +1,9 @@
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+require('dbConnection.php');
+?>
+
 <!doctype html>
 <html lang="en">
   <head>

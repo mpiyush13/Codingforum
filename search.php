@@ -24,56 +24,44 @@ require('dbConnection.php');
   <body>
   <?php require('partial/navbar.php') ?>
 
-    <div class="container my-2">
-        <h1 class="text-center"> Coding Forum</h1>
-        <div class="row">
-         <?php
+   <div class="container my-3">
+   <h1> Here is serch result for :<?php echo $_GET['search']; ?> </h1>
+<div class="result">
 
-       
+   <?php
+$id=$_GET["search"];
+$sql = "
+SELECT * FROM `threads` WHERE MATCH (thread_title,thread_desc) against ('$id')";
+  $result = $conn->query($sql);
+  $check=true;
+  if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        $thread_user_id=$row['thread_user_id'];
+        
+    // echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+    $check=false;
+    echo '<div class="jumbotron">
+  <h1 class="display-4"><a href="/Piyush/thread.php?threadid='.$row['thread_id'].'">'.$row['thread_title'].'<a></h1>
+  <p class="lead"> '.$row['thread_desc'].'.</p>
+  
+</div>';
 
-          $sql = "SELECT * FROM cotegory";
-          $result = $conn->query($sql);
-          
-          if ($result->num_rows > 0) {
-            
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                $id=$row["cotegory_id"];
-                echo '<div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                      <img class="card-img-top" src="" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="/Piyush/threadlist.php?id='.$id.'">'.$row["cotegory_name"].'</a></h5>
-                            <p class="card-text">'.substr($row["cotegory_description"],0,10).'.....</p>
-                            <a href="/Piyush/threadlist.php?id='.$id.'" class="btn btn-primary">View Thread</a>
-                        </div>
-                </div>
-            </div> ';
+  }
+}else
+{
+    echo '<div class="jumbotron">
+  <h1 class="display-4">No result found</h1>
+  <p class="lead"> I did not get any result.</p>
+  
+</div>';
+}
 
-
-             
-            }
-          } 
-          else {
-            echo "0 results";
-          }
-          $conn->close();
-         ?>
-           
-            
-
-
-
-
-
-
-
-
-            
-
-        </div>
-
-    </div>
+?>
+  
+  
+</div>
+   </div>
 
 
 
