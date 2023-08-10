@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/Piyush">Coding forum</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,18 +30,47 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="nav-link" href="/Piyush/contact.php">Contact</a>
       </li>
     </ul>
-    <div class="my-2 row">
-    <form class="form-inline my-2 my-lg-0">
+    <div class="my-2 row">';
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true)
+    {
+        echo '<form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <p class="text-light my-0 mx-2">Welcome to '.$_SESSION['username'].' </p>
+      <a href="./partial/logout.php" class="btn btn-outline-success ml-2" >Logout</a>
+      ' ;
+    }
+    else{
+
+        echo '<form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
     </form>
         <button class="btn btn-outline-success ml-2" data-toggle="modal" data-target="#loginModal" >Login</button>
-        <button class="btn btn-outline-success mx-2" data-toggle="modal" data-target="#signupModal" >Signup</button>
-    </div>
+    
+        <button class="btn btn-outline-success mx-2" data-toggle="modal" data-target="#signupModal" >Signup</button>';
+    }
+   
+   
+        echo '
+        </div>
     
   </div>
 </nav>';
 include'partial/_loginModal.php';
 include'partial/_signupModal.php';
+
+if(isset($_GET['signup']) && $_GET['signup']==true)
+{ 
+    
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong>You are successfuly signup.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>';
+}
+
 
 ?>

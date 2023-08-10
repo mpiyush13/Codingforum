@@ -12,7 +12,9 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="/Php_Test/signup.php" method="post">
+
+
+      <form action="/Piyush/partial/_handlesignup.php" method="post">
   <div class="form-group">
     <label for="username">Username</label>
     <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter username">
@@ -35,6 +37,8 @@
         
       </div>
       </form>
+
+
     </div>
   </div>
 </div>

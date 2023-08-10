@@ -12,7 +12,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="/Php_Test/login.php" method="post">
+      <form action="/Piyush/partial/_handlelogin.php" method="post">
   <div class="form-group">
     <label for="username">Username</label>
     <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter username">
