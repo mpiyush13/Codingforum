@@ -15,7 +15,7 @@
       <form action="/Piyush/partial/_handlelogin.php" method="post">
   <div class="form-group">
     <label for="username">Username</label>
-    <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter username">
+    <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter username">
    
 </div>
   <div class="form-group">

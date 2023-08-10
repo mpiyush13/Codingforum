@@ -60,12 +60,17 @@ if($method=='POST')
 require('dbConnection.php');
 
 
-$sql = "SELECT thread_id, thread_title, thread_desc, thread_id FROM threads WHERE thread_id='$id'";
+$sql = "SELECT thread_id, thread_title, thread_desc, thread_user_id FROM threads WHERE thread_id='$id'";
   $result = $conn->query($sql);
   $check=true;
   if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
+        $thread_user_id=$row['thread_user_id'];
+        $sql2 = "SELECT user_email FROM users WHERE sno='$thread_user_id'";
+        $result2 = $conn->query($sql2);
+        $row2 = $result2->fetch_assoc();
+        $user_name=$row2['user_email'];
     // echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
     $check=false;
     echo '<div class="jumbotron">
@@ -74,7 +79,7 @@ $sql = "SELECT thread_id, thread_title, thread_desc, thread_id FROM threads WHER
   <hr class="my-4">
   <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
   <p class="lead">
-   created by Piyush
+   created by '.$user_name.'
   </p>
 </div>';
 
